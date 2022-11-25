@@ -1,6 +1,6 @@
 import { useNavigation } from '@react-navigation/native';
 import { useLayoutEffect } from 'react';
-import { SafeAreaView } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { Header } from '../components/Header/Index';
 
 export function Home() {
