@@ -1,8 +1,10 @@
 import { useNavigation } from '@react-navigation/native';
 import { useLayoutEffect, useState } from 'react';
+import { ScrollView } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Calendar } from '../components/Calendar';
 import { Header } from '../components/Header/Index';
+import { NotesSection } from '../components/NotesSection';
 import { TodoSection } from '../components/TodoSection';
 import { todos } from '../mocks/todo';
 
@@ -24,9 +26,12 @@ export function Home() {
 
   return (
     <SafeAreaView className="bg-[#0f0f0f] flex-1">
-      <Header />
-      <Calendar selectedDay={selectedDay} onPress={updateSelectedDay} />
-      <TodoSection todos={filteredTodos} />
+      <ScrollView>
+        <Header />
+        <Calendar selectedDay={selectedDay} onPress={updateSelectedDay} />
+        <TodoSection todos={filteredTodos} />
+        <NotesSection />
+      </ScrollView>
     </SafeAreaView>
   );
 }
