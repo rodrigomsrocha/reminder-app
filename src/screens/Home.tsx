@@ -3,6 +3,8 @@ import { useLayoutEffect, useState } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Calendar } from '../components/Calendar';
 import { Header } from '../components/Header/Index';
+import { TodoSection } from '../components/TodoSection';
+import { todos } from '../mocks/todo';
 
 export function Home() {
   const navigation = useNavigation();
@@ -11,6 +13,8 @@ export function Home() {
   const updateSelectedDay = (day: number) => {
     setSelectedDay(day);
   };
+
+  const filteredTodos = todos.filter((todo) => todo.createdAt === selectedDay);
 
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -22,6 +26,7 @@ export function Home() {
     <SafeAreaView className="bg-[#0f0f0f] flex-1">
       <Header />
       <Calendar selectedDay={selectedDay} onPress={updateSelectedDay} />
+      <TodoSection todos={filteredTodos} />
     </SafeAreaView>
   );
 }
