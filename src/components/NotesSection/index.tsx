@@ -1,12 +1,15 @@
 import { useNavigation } from '@react-navigation/native';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { StackNavigationProp } from '@react-navigation/stack';
 import { Text, TouchableOpacity, View } from 'react-native';
+import { RootStackParamList } from '../../../App';
 import { notes } from '../../mocks/note';
 import { Note } from '../Note';
 
+type NotesScetionProps = StackNavigationProp<RootStackParamList, 'Notes'>;
+
 export function NotesSection() {
   const recentNotes = notes.slice(0, 2);
-  const navigation = useNavigation<NativeStackNavigationProp<any>>();
+  const navigation = useNavigation<NotesScetionProps>();
 
   return (
     <View className="p-2 mt-4">

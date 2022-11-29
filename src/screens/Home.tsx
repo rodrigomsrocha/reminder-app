@@ -1,5 +1,4 @@
-import { useNavigation } from '@react-navigation/native';
-import { useLayoutEffect, useState } from 'react';
+import { useState } from 'react';
 import { ScrollView } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Calendar } from '../components/Calendar';
@@ -9,7 +8,6 @@ import { TodoSection } from '../components/TodoSection';
 import { todos } from '../mocks/todo';
 
 export function Home() {
-  const navigation = useNavigation();
   const [selectedDay, setSelectedDay] = useState<number>(new Date().getDate());
 
   const updateSelectedDay = (day: number) => {
@@ -17,12 +15,6 @@ export function Home() {
   };
 
   const filteredTodos = todos.filter((todo) => todo.createdAt === selectedDay);
-
-  useLayoutEffect(() => {
-    navigation.setOptions({
-      headerShown: false,
-    });
-  }, []);
 
   return (
     <SafeAreaView className="bg-[#0f0f0f] flex-1">
