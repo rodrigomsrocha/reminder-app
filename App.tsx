@@ -1,18 +1,20 @@
 import { NavigationContainer } from '@react-navigation/native';
-import { CardStyleInterpolators, createStackNavigator } from '@react-navigation/stack';
+import { CardStyleInterpolators } from '@react-navigation/stack';
 import * as React from 'react';
+import { createSharedElementStackNavigator } from 'react-navigation-shared-element';
 import { Home } from './src/screens/Home';
 import { Note } from './src/screens/Note';
 import { Notes } from './src/screens/Notes';
+import { NoteType } from './src/types';
 
 export type RootStackParamList = {
   Home: undefined;
   Notes: undefined;
-  Note: { note: { title: string; description: string } };
+  Note: { note: NoteType };
 };
 
 export default function App() {
-  const Stack = createStackNavigator<RootStackParamList>();
+  const Stack = createSharedElementStackNavigator<RootStackParamList>();
 
   return (
     <NavigationContainer>
@@ -28,9 +30,11 @@ export default function App() {
         <Stack.Screen
           name="Note"
           component={Note}
-          options={() => ({
-            cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
-          })}
+          sharedElements={(route) => {
+            return [
+              { id: `${route.params.note.id}${route.params.note.title}.title`, animation: 'fade', resize: 'none' },
+            ];
+          }}
         />
       </Stack.Navigator>
     </NavigationContainer>
